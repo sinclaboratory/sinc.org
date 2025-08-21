@@ -1,1 +1,1 @@
-# sinc.org
+SINC
