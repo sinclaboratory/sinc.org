@@ -12,7 +12,15 @@ export default function Navigation() {
   ]
 
   return (
-    <nav className="bg-white dark:bg-black sticky top-0 z-50 border-b border-gray-200 dark:border-gray-900">
+    <nav className="
+          sticky top-0 z-50
+          border-b border-white/20 dark:border-white/10
+          shadow-sm
+          backdrop-blur-md backdrop-saturate-150
+          bg-white/50 dark:bg-black/30
+          supports-[backdrop-filter]:bg-white/40 supports-[backdrop-filter]:dark:bg-black/25
+        "
+      >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 
@@ -24,6 +32,7 @@ export default function Navigation() {
               width={50}
               height={50}
               className="w-15 h-15"
+              priority
             />
             <span className="font-serif font-bold text-2xl text-gray-900 dark:text-white">
               SINC
