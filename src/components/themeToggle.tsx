@@ -21,7 +21,7 @@ export default function ThemeToggle() {
       )}
       aria-label="Toggle theme"
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="dark:text-foreground">
         {/* Sun rays */}
         <g
           className={cn(
