@@ -1,51 +1,96 @@
 "use client"
-import { useState, useEffect } from "react"
+
+import { useState } from "react"
+import { cn } from "@/lib/utils"
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [isDark, setIsDark] = useState(false)
 
-  // apply theme ke <html>
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
-  }, [theme])
+  const toggleTheme = () => {
+    setIsDark(!isDark)
+    // Toggle dark class on document
+    document.documentElement.classList.toggle("dark")
+  }
 
   return (
     <button
-      className="theme-toggle"
-      type="button"
-      title="Toggle theme"
+      onClick={toggleTheme}
+      className={cn(
+        "relative p-3 rounded-full transition-all duration-300 ease-in-out",
+        "hover:scale-110 active:scale-95",
+      )}
       aria-label="Toggle theme"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        width="1em"
-        height="1em"
-        fill="currentColor"
-        strokeLinecap="round"
-        className="theme-toggle__classic"
-        viewBox="0 0 32 32"
-      >
-        <clipPath id="theme-toggle__classic__cutout">
-          <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
-        </clipPath>
-        <g clipPath="url(#theme-toggle__classic__cutout)">
-          <circle cx="16" cy="16" r="9.34" />
-          <g stroke="currentColor" strokeWidth="1.5">
-            <path d="M16 5.5v-4" />
-            <path d="M16 30.5v-4" />
-            <path d="M1.5 16h4" />
-            <path d="M26.5 16h4" />
-            <path d="m23.4 8.6 2.8-2.8" />
-            <path d="m5.7 26.3 2.9-2.9" />
-            <path d="m5.8 5.8 2.8 2.8" />
-            <path d="m23.4 23.4 2.9 2.9" />
-          </g>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground">
+        {/* Sun rays */}
+        <g
+          className={cn(
+            "transition-all duration-500 ease-in-out origin-center",
+            isDark ? "opacity-0 scale-75 rotate-45" : "opacity-100 scale-100 rotate-0",
+          )}
+        >
+          {/* Top ray */}
+          <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          {/* Top-right ray */}
+          <line x1="18.36" y1="5.64" x2="17.07" y2="6.93" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          {/* Right ray */}
+          <line x1="23" y1="12" x2="21" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          {/* Bottom-right ray */}
+          <line
+            x1="18.36"
+            y1="18.36"
+            x2="17.07"
+            y2="17.07"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          {/* Bottom ray */}
+          <line x1="12" y1="23" x2="12" y2="21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          {/* Bottom-left ray */}
+          <line x1="5.64" y1="18.36" x2="6.93" y2="17.07" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          {/* Left ray */}
+          <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          {/* Top-left ray */}
+          <line x1="5.64" y1="5.64" x2="6.93" y2="6.93" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </g>
+
+        {/* Sun center circle */}
+        <circle
+          cx="12"
+          cy="12"
+          r="5"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+          className={cn(
+            "transition-all duration-500 ease-in-out",
+            isDark ? "opacity-0 scale-75" : "opacity-100 scale-100",
+          )}
+        />
+
+        {/* Moon crescent */}
+        <path
+          d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+          className={cn(
+            "transition-all duration-500 ease-in-out origin-center",
+            isDark ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-75 rotate-45",
+          )}
+        />
+
+        {/* Decorative stars for moon mode */}
+        <g
+          className={cn(
+            "transition-all duration-700 ease-in-out",
+            isDark ? "opacity-60 scale-100" : "opacity-0 scale-50",
+          )}
+        >
+          <circle cx="17" cy="7" r="0.5" fill="currentColor" />
+          <circle cx="19" cy="9" r="0.3" fill="currentColor" />
+          <circle cx="6" cy="8" r="0.4" fill="currentColor" />
         </g>
       </svg>
     </button>
